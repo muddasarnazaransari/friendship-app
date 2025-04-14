@@ -2,14 +2,21 @@
 
 import { useEffect, useState } from 'react';
 
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  mobile: string;
+}
+
 export default function AdminDashboard() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetch('/api/admin/pending-users')
       .then(res => res.json())
-      .then(data => {
+      .then((data: User[]) => {
         setUsers(data);
         setLoading(false);
       });
@@ -23,7 +30,7 @@ export default function AdminDashboard() {
     });
 
     if (res.ok) {
-      setUsers(users.filter((u: any) => u._id !== id));
+      setUsers(prev => prev.filter(user => user._id !== id));
     }
   };
 
@@ -36,8 +43,11 @@ export default function AdminDashboard() {
         <p className="text-center text-xl">No pending friend requests 💤</p>
       ) : (
         <div className="space-y-4">
-          {users.map((user: any) => (
-            <div key={user._id} className="bg-gray-800 p-4 rounded-lg flex justify-between items-center">
+          {users.map(user => (
+            <div
+              key={user._id}
+              className="bg-gray-800 p-4 rounded-lg flex justify-between items-center"
+            >
               <div>
                 <p><strong>Name:</strong> {user.name}</p>
                 <p><strong>Email:</strong> {user.email}</p>
