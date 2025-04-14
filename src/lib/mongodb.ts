@@ -1,3 +1,4 @@
+// src/lob/mongodb.ts
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
@@ -11,11 +12,11 @@ interface MongooseCache {
   promise: Promise<typeof mongoose> | null;
 }
 
-const globalWithMongoose = global as typeof global & {
-  mongoose: MongooseCache;
-};
+declare global {
+  var mongoose: MongooseCache | undefined;
+}
 
-const cached: MongooseCache = globalWithMongoose.mongoose || {
+const cached: MongooseCache = global.mongoose ?? {
   conn: null,
   promise: null,
 };
@@ -31,7 +32,7 @@ async function connectDB(): Promise<typeof mongoose> {
   }
 
   cached.conn = await cached.promise;
-  globalWithMongoose.mongoose = cached;
+  global.mongoose = cached;
 
   return cached.conn;
 }

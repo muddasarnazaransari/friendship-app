@@ -1,3 +1,4 @@
+// src/app/admin-dashboard/page.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -11,7 +12,7 @@ interface User {
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/admin/pending-users')
