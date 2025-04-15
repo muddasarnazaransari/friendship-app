@@ -1,4 +1,3 @@
-// src/app/api/admin/approve-user/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
@@ -15,6 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
+    // Update user's approval status
     user.isApproved = true;
     await user.save();
 
@@ -34,7 +34,17 @@ export async function POST(req: NextRequest) {
       text: `Hey ${user.name}, your friendship request has been approved! Visit your dashboard here: ${process.env.BASE_URL}/dashboard`,
     });
 
-    return NextResponse.json({ message: "User approved" });
+    return NextResponse.json({
+      message: "User approved",
+      approvedUser: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        mobile: user.mobile,
+        role: user.role,
+        isApproved: user.isApproved,
+      },
+    });
   } catch (err) {
     console.error("💥 Approval Error:", err);
     return NextResponse.json({ message: "Server Error" }, { status: 500 });
