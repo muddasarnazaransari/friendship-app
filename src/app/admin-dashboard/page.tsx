@@ -37,7 +37,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
-      <h1 className="text-4xl mb-6 text-center">Welcome my king 👑</h1>
+      <h1 className="text-4xl mb-6 text-center">You are admin 👑</h1>
       {loading ? (
         <p className="text-center text-xl">Loading pending requests...</p>
       ) : users.length === 0 ? (

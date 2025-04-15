@@ -56,9 +56,10 @@ export async function POST(req: NextRequest) {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: user.email,
-        subject: "Welcome My King",
-        text: "Welcome my king",
+        subject: "Welcome Back to Your Friendship App!",
+        text: `Hey ${user.name || "Friend"},\n\nYou’ve successfully logged in to your Friendship App account. We're glad to have you back!\n\nIf this wasn't you, please secure your account immediately.\n\nStay connected, stay awesome. 😎\n\n— The Friendship App Team`
       });
+      
 
       console.log("📧 Email sent to admin");
     }

@@ -32,9 +32,10 @@ export async function POST(req: NextRequest) {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: userEmail,
-      subject: "Friendship Request Declined 💔",
-      text: `Sorry ${userName}, the King has declined your friend request. You can try again later.`,
+      subject: "Your Friendship Request Was Declined 💔",
+      text: `Hey ${userName},\n\nWe wanted to let you know that Muddasar has respectfully declined your friend request this time.\n\nBut hey, don’t lose hope — things change, and there’s always a next time. Keep the good vibes going ✨\n\nCheers,\nThe Friendship App Team`,
     });
+    
 
     return NextResponse.json({ message: "User declined and deleted" });
   } catch (err) {

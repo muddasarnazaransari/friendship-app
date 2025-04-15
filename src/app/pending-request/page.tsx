@@ -40,8 +40,8 @@ export default function PendingRequestPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-indigo-400 text-white text-center text-2xl p-6">
-      Your friend request to the King is pending 👑💌<br />
-      The King will become your friend soon!
+      Your friend request to the Muddasar is pending 👑💌<br />
+      The Muddasar will become your friend soon!
     </div>
   );
 }

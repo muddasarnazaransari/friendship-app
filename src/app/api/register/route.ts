@@ -62,8 +62,32 @@ export async function POST(req: NextRequest) {
       from: process.env.EMAIL_USER,
       to: process.env.ADMIN_EMAIL,
       subject: "🧑 New Friend Request Received!",
-      text: `A user sent a friend request:\n\nName: ${name}\nEmail: ${email}\nMobile: ${mobile}\n\nApprove or Decline here: ${approvalLink}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>👋 You've Got a New Friend Request!</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Mobile:</strong> ${mobile}</p>
+          <p>Want to make it official?</p>
+          <a 
+            href="${approvalLink}" 
+            style="
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: #4CAF50;
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+              margin-top: 10px;
+            "
+          >Approve or Decline Request</a>
+          <p style="margin-top: 20px; font-size: 12px; color: #888;">
+            This is an automated email from your Friendship App Admin Panel.
+          </p>
+        </div>
+      `
     });
+    
 
     console.log("✅ Email sent successfully");
 
