@@ -12,7 +12,9 @@ interface MongooseCache {
   promise: Promise<typeof mongoose> | null;
 }
 
+// Fix for ESLint 'no-var' rule
 declare global {
+  // eslint-disable-next-line no-var
   var mongoose: MongooseCache | undefined;
 }
 
