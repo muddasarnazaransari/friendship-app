@@ -25,7 +25,7 @@ export default function RegisterPage() {
     setErrorMsg("");
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("/api/admin/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form }),
@@ -39,9 +39,7 @@ export default function RegisterPage() {
         return;
       }
 
-      // Save email to localStorage for status checking
-      localStorage.setItem("email", form.email);
-
+      // No localStorage. Rely on cookie-based auth/session.
       router.push("/pending-request");
     } catch (err) {
       console.error(err);

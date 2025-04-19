@@ -1,7 +1,6 @@
-// src/app/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -11,13 +10,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
-  // Auto-login on reload
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    if (role === "admin") router.push("/admin-dashboard");
-    else if (role === "user") router.push("/dashboard");
-  }, [router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +31,8 @@ export default function LoginPage() {
         return;
       }
 
-      localStorage.setItem("role", data.role);
+      // Assuming the backend sets a secure cookie/session
+      // Redirect based on user role from server response
       router.push(data.role === "admin" ? "/admin-dashboard" : "/dashboard");
     } catch (err) {
       console.error(err);
