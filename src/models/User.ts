@@ -1,4 +1,3 @@
-// src/models/User.ts
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
@@ -8,6 +7,7 @@ export interface IUser extends Document {
   password: string;
   role: "admin" | "user";
   isApproved: boolean;
+  isBlocked: boolean; // ✅ added
 }
 
 const UserSchema = new Schema<IUser>(
@@ -18,6 +18,7 @@ const UserSchema = new Schema<IUser>(
     password: { type: String, required: true },
     role: { type: String, enum: ["admin", "user"], default: "user" },
     isApproved: { type: Boolean, default: false },
+    isBlocked: { type: Boolean, default: false }, // ✅ added
   },
   { timestamps: true }
 );
